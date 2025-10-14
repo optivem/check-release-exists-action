@@ -1,9 +1,13 @@
-name: 'Check Version Release Exists'
-description: 'Checks that a specific version release exists in the repository'
+name: 'Check Release Exists'
+description: 'Checks if a specific version release exists in the repository using GitHub CLI'
+author: 'Optivem'
+branding:
+  icon: 'check-circle'
+  color: 'green'
 
 inputs:
   version:
-    description: 'Release version to validate (e.g., v1.0.4-rc)'
+    description: 'Release version to validate (e.g., v1.0.4, v2.1.0-rc)'
     required: true
   github-token:
     description: 'GitHub token for API access'
