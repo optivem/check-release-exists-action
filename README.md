@@ -2,6 +2,8 @@
 
 [![Test Action](https://github.com/optivem/check-release-exists-action/actions/workflows/test.yml/badge.svg)](https://github.com/optivem/check-release-exists-action/actions/workflows/test.yml)
 
+[![GitHub release](https://img.shields.io/github/release/optivem/check-release-exists-action.svg)](https://github.com/optivem/check-release-exists-action/releases)
+
 A GitHub Action that checks if a specific version release exists in a repository. This action is useful for validating releases in CI/CD workflows, ensuring proper version management, and preventing duplicate releases.
 
 ## Features
