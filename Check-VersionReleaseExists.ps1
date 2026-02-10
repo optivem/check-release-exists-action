@@ -38,12 +38,12 @@ function Test-ReleaseExists {
                 Message = "Release found"
             }
         } else {
-            Write-Host "❌ Release $Version not found" -ForegroundColor Red
+            Write-Host "Release $Version not found" -ForegroundColor Yellow
             return @{
                 Exists = $false
                 Tag = $null
-                Success = $false
-                Message = "Release not found: $result"
+                Success = $true
+                Message = "Release not found"
             }
         }
     }
@@ -79,14 +79,13 @@ try {
         Write-Host "  tag: (not set - release doesn't exist)" -ForegroundColor Yellow
     }
     
-    # Exit with appropriate code
-    if ($result.Success -and $result.Exists) {
-        Write-Host "✅ Release validation successful" -ForegroundColor Green
-        exit 0
+    # Exit 0 when we successfully determined the result (exists or not); only exit 1 on script error
+    if ($result.Exists) {
+        Write-Host "✅ Release found" -ForegroundColor Green
     } else {
-        Write-Host "❌ Release validation failed: $($result.Message)" -ForegroundColor Red
-        exit 1
+        Write-Host "Release not found (exists=false)" -ForegroundColor Yellow
     }
+    exit 0
 }
 catch {
     Write-Host "❌ Script execution failed: $($_.Exception.Message)" -ForegroundColor Red
