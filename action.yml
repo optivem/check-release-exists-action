@@ -18,9 +18,6 @@ outputs:
   exists:
     description: 'Whether the release exists (true/false)'
     value: ${{ steps.check-release.outputs.exists }}
-  tag:
-    description: 'The validated release tag'
-    value: ${{ steps.check-release.outputs.tag }}
 
 runs:
   using: 'composite'

@@ -42,7 +42,7 @@ jobs:
       
       - name: Handle release exists
         if: steps.check-release.outputs.exists == 'true'
-        run: echo "Release ${{ steps.check-release.outputs.tag }} exists!"
+        run: echo "Release ${{ inputs.version }} exists!"
       
       - name: Handle release doesn't exist
         if: steps.check-release.outputs.exists == 'false'
@@ -77,7 +77,7 @@ jobs:
       - name: Deploy to production
         if: steps.check-release.outputs.exists == 'true'
         run: |
-          echo "Deploying release ${{ steps.check-release.outputs.tag }} to production"
+          echo "Deploying release ${{ steps.version.outputs.version }} to production"
           # Your deployment commands here
       
       - name: Skip deployment
@@ -97,7 +97,6 @@ jobs:
 | Output | Description | Example |
 |--------|-------------|---------|
 | `exists` | Whether the release exists (`true`/`false`) | `true` |
-| `tag` | The validated release tag (only set if exists) | `v1.0.4` |
 
 ## Requirements
 
@@ -107,8 +106,8 @@ jobs:
 ## Error Handling
 
 The action will:
-- ✅ Exit with code 0 if the release exists
-- ❌ Exit with code 1 if the release doesn't exist or if there's an error
+- ✅ Exit with code 0 when the check completes (whether the release exists or not)
+- ❌ Exit with code 1 only on script or API errors
 - 📝 Provide detailed logging for debugging
 
 ## Use Cases

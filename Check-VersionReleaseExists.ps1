@@ -33,7 +33,6 @@ function Test-ReleaseExists {
             Write-Host "✅ Release $Version found" -ForegroundColor Green
             return @{
                 Exists = $true
-                Tag = $Version
                 Success = $true
                 Message = "Release found"
             }
@@ -41,7 +40,6 @@ function Test-ReleaseExists {
             Write-Host "Release $Version not found" -ForegroundColor Yellow
             return @{
                 Exists = $false
-                Tag = $null
                 Success = $true
                 Message = "Release not found"
             }
@@ -51,7 +49,6 @@ function Test-ReleaseExists {
         Write-Host "❌ Error checking release: $($_.Exception.Message)" -ForegroundColor Red
         return @{
             Exists = $false
-            Tag = $null
             Success = $false
             Message = "Error: $($_.Exception.Message)"
         }
@@ -66,18 +63,8 @@ try {
     Write-Host "Setting GitHub Actions outputs..." -ForegroundColor Yellow
     "exists=$($result.Exists.ToString().ToLower())" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
     
-    if ($result.Exists) {
-        "tag=$($result.Tag)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
-    }
-    
-    # Print all outputs for debugging
-    Write-Host "📋 GitHub Actions Outputs Set:" -ForegroundColor Cyan
-    Write-Host "  exists: $($result.Exists.ToString().ToLower())" -ForegroundColor Green
-    if ($result.Exists) {
-        Write-Host "  tag: $($result.Tag)" -ForegroundColor Green
-    } else {
-        Write-Host "  tag: (not set - release doesn't exist)" -ForegroundColor Yellow
-    }
+    # Print output for debugging
+    Write-Host "📋 GitHub Actions Output: exists=$($result.Exists.ToString().ToLower())" -ForegroundColor Cyan
     
     # Exit 0 when we successfully determined the result (exists or not); only exit 1 on script error
     if ($result.Exists) {
