@@ -1,3 +1,6 @@
+> [!WARNING]
+> This action has moved to [optivem/actions](https://github.com/optivem/actions). Use `optivem/actions/check-release-exists@v1` instead.
+
 # Check Release Exists Action
 
 [![Test Action](https://github.com/optivem/check-release-exists-action/actions/workflows/test.yml/badge.svg)](https://github.com/optivem/check-release-exists-action/actions/workflows/test.yml)
